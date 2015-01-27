@@ -37,7 +37,7 @@ The core of the idea is that you pay a small amount on your first hectare of lan
 See my essays:
 
 * [Me and you and the Duke of Buccleuch](http://blog.journeyman.cc/2014/12/me-and-you-and-duke-of-buccleuch.html)
-* 
+* [Draft submission to the English parliament's enquiry anent Scottish land reform](http://blog.journeyman.cc/2013/10/draft-submission-to-english-parliaments.html)
 
 ## License
 
