@@ -2,7 +2,7 @@
 
 Clojure code designed to compute values for exponential land tax
 
-## Usage 
+## Usage
 
     (use 'exponential-tax.core)
     (sample-taxes 0.5 1.05 holding-sizes)
@@ -38,6 +38,10 @@ See my essays:
 
 * [Me and you and the Duke of Buccleuch](http://blog.journeyman.cc/2014/12/me-and-you-and-duke-of-buccleuch.html)
 * [Draft submission to the English parliament's enquiry anent Scottish land reform](http://blog.journeyman.cc/2013/10/draft-submission-to-english-parliaments.html)
+
+## Experiment with this
+
+If you want to muck about with this, thanks to the magic of [Gorilla Repl](http://gorilla-repl.org/) you can do so on-line, [here](http://viewer.gorilla-repl.org/view.html?source=github&user=simon-brooke&repo=exponential-tax&path=src/exponential_tax/core.clj). It's quite instructive to see what happens when you make quite small changes to the constant and exponent.
 
 ## License
 
