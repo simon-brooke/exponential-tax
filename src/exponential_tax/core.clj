@@ -68,9 +68,7 @@
 ;; **
 ;;; Nothing's changed. So what's all this about?
 ;;; 
-;;; Well, if we increase the exponent just a bit, we change the angle of the graph.
-;;; 
-;;; Exponents make numbers increase more rapidly
+;;; Well, if we increase the exponent just a bit, we change the shape of the graph; exponents make numbers increase more rapidly
 ;; **
 
 ;; @@
