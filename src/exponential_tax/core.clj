@@ -28,10 +28,59 @@
 (ns exponential-tax.core
   (:require 
     [clojure.math.numeric-tower :as math]
+    [gorilla-plot.core :refer :all]
     [gorilla-repl.table :refer :all]))
 ;; @@
 ;; =>
 ;;; {"type":"html","content":"<span class='clj-nil'>nil</span>","value":"nil"}
+;; <=
+
+;; **
+;;; An exponential series is a series in which each successive value is raised by an exponent. 
+;;; 
+;;; So suppose we take the numbers 1...10, and we graph them:
+;; **
+
+;; @@
+(list-plot (range 0 10))
+
+;; @@
+;; =>
+;;; {"type":"vega","content":{"axes":[{"scale":"x","type":"x"},{"scale":"y","type":"y"}],"scales":[{"name":"x","type":"linear","range":"width","zero":false,"domain":{"data":"0e944ecf-0a22-4b1f-a709-14ed2840b0a7","field":"data.x"}},{"name":"y","type":"linear","range":"height","nice":true,"zero":false,"domain":{"data":"0e944ecf-0a22-4b1f-a709-14ed2840b0a7","field":"data.y"}}],"marks":[{"type":"symbol","from":{"data":"0e944ecf-0a22-4b1f-a709-14ed2840b0a7"},"properties":{"enter":{"x":{"scale":"x","field":"data.x"},"y":{"scale":"y","field":"data.y"},"fill":{"value":"steelblue"},"fillOpacity":{"value":1}},"update":{"shape":"circle","size":{"value":70},"stroke":{"value":"transparent"}},"hover":{"size":{"value":210},"stroke":{"value":"white"}}}}],"data":[{"name":"0e944ecf-0a22-4b1f-a709-14ed2840b0a7","values":[{"x":0,"y":0},{"x":1,"y":1},{"x":2,"y":2},{"x":3,"y":3},{"x":4,"y":4},{"x":5,"y":5},{"x":6,"y":6},{"x":7,"y":7},{"x":8,"y":8},{"x":9,"y":9}]}],"width":400,"height":247.2187957763672,"padding":{"bottom":40,"top":10,"right":10,"left":55}},"value":"#gorilla_repl.vega.VegaView{:content {:axes [{:scale \"x\", :type \"x\"} {:scale \"y\", :type \"y\"}], :scales [{:name \"x\", :type \"linear\", :range \"width\", :zero false, :domain {:data \"0e944ecf-0a22-4b1f-a709-14ed2840b0a7\", :field \"data.x\"}} {:name \"y\", :type \"linear\", :range \"height\", :nice true, :zero false, :domain {:data \"0e944ecf-0a22-4b1f-a709-14ed2840b0a7\", :field \"data.y\"}}], :marks [{:type \"symbol\", :from {:data \"0e944ecf-0a22-4b1f-a709-14ed2840b0a7\"}, :properties {:enter {:x {:scale \"x\", :field \"data.x\"}, :y {:scale \"y\", :field \"data.y\"}, :fill {:value \"steelblue\"}, :fillOpacity {:value 1}}, :update {:shape \"circle\", :size {:value 70}, :stroke {:value \"transparent\"}}, :hover {:size {:value 210}, :stroke {:value \"white\"}}}}], :data [{:name \"0e944ecf-0a22-4b1f-a709-14ed2840b0a7\", :values ({:x 0, :y 0} {:x 1, :y 1} {:x 2, :y 2} {:x 3, :y 3} {:x 4, :y 4} {:x 5, :y 5} {:x 6, :y 6} {:x 7, :y 7} {:x 8, :y 8} {:x 9, :y 9})}], :width 400, :height 247.2188, :padding {:bottom 40, :top 10, :right 10, :left 55}}}"}
+;; <=
+
+;; **
+;;; Nothing surprising there.
+;;; 
+;;; So let's try again, and this time raise each by the exponent 1.
+;; **
+
+;; @@
+(list-plot 
+  (map 
+  	#(math/expt % 1)
+  	(range 0 10)))
+;; @@
+;; =>
+;;; {"type":"vega","content":{"axes":[{"scale":"x","type":"x"},{"scale":"y","type":"y"}],"scales":[{"name":"x","type":"linear","range":"width","zero":false,"domain":{"data":"1fd882f6-5671-49a4-8312-bdf1d73bcdca","field":"data.x"}},{"name":"y","type":"linear","range":"height","nice":true,"zero":false,"domain":{"data":"1fd882f6-5671-49a4-8312-bdf1d73bcdca","field":"data.y"}}],"marks":[{"type":"symbol","from":{"data":"1fd882f6-5671-49a4-8312-bdf1d73bcdca"},"properties":{"enter":{"x":{"scale":"x","field":"data.x"},"y":{"scale":"y","field":"data.y"},"fill":{"value":"steelblue"},"fillOpacity":{"value":1}},"update":{"shape":"circle","size":{"value":70},"stroke":{"value":"transparent"}},"hover":{"size":{"value":210},"stroke":{"value":"white"}}}}],"data":[{"name":"1fd882f6-5671-49a4-8312-bdf1d73bcdca","values":[{"x":0,"y":0},{"x":1,"y":1},{"x":2,"y":2},{"x":3,"y":3},{"x":4,"y":4},{"x":5,"y":5},{"x":6,"y":6},{"x":7,"y":7},{"x":8,"y":8},{"x":9,"y":9}]}],"width":400,"height":247.2187957763672,"padding":{"bottom":40,"top":10,"right":10,"left":55}},"value":"#gorilla_repl.vega.VegaView{:content {:axes [{:scale \"x\", :type \"x\"} {:scale \"y\", :type \"y\"}], :scales [{:name \"x\", :type \"linear\", :range \"width\", :zero false, :domain {:data \"1fd882f6-5671-49a4-8312-bdf1d73bcdca\", :field \"data.x\"}} {:name \"y\", :type \"linear\", :range \"height\", :nice true, :zero false, :domain {:data \"1fd882f6-5671-49a4-8312-bdf1d73bcdca\", :field \"data.y\"}}], :marks [{:type \"symbol\", :from {:data \"1fd882f6-5671-49a4-8312-bdf1d73bcdca\"}, :properties {:enter {:x {:scale \"x\", :field \"data.x\"}, :y {:scale \"y\", :field \"data.y\"}, :fill {:value \"steelblue\"}, :fillOpacity {:value 1}}, :update {:shape \"circle\", :size {:value 70}, :stroke {:value \"transparent\"}}, :hover {:size {:value 210}, :stroke {:value \"white\"}}}}], :data [{:name \"1fd882f6-5671-49a4-8312-bdf1d73bcdca\", :values ({:x 0, :y 0} {:x 1, :y 1} {:x 2, :y 2} {:x 3, :y 3} {:x 4, :y 4} {:x 5, :y 5} {:x 6, :y 6} {:x 7, :y 7} {:x 8, :y 8} {:x 9, :y 9})}], :width 400, :height 247.2188, :padding {:bottom 40, :top 10, :right 10, :left 55}}}"}
+;; <=
+
+;; **
+;;; Nothing's changed. So what's all this about?
+;;; 
+;;; Well, if we increase the exponent just a bit, we change the angle of the graph.
+;;; 
+;;; Exponents make numbers increase more rapidly
+;; **
+
+;; @@
+(list-plot 
+  (map 
+  	#(math/expt % 2)
+  	(range 0 10)))
+;; @@
+;; =>
+;;; {"type":"vega","content":{"axes":[{"scale":"x","type":"x"},{"scale":"y","type":"y"}],"scales":[{"name":"x","type":"linear","range":"width","zero":false,"domain":{"data":"50689ba9-dfbc-4579-898f-e05d09d4bd4c","field":"data.x"}},{"name":"y","type":"linear","range":"height","nice":true,"zero":false,"domain":{"data":"50689ba9-dfbc-4579-898f-e05d09d4bd4c","field":"data.y"}}],"marks":[{"type":"symbol","from":{"data":"50689ba9-dfbc-4579-898f-e05d09d4bd4c"},"properties":{"enter":{"x":{"scale":"x","field":"data.x"},"y":{"scale":"y","field":"data.y"},"fill":{"value":"steelblue"},"fillOpacity":{"value":1}},"update":{"shape":"circle","size":{"value":70},"stroke":{"value":"transparent"}},"hover":{"size":{"value":210},"stroke":{"value":"white"}}}}],"data":[{"name":"50689ba9-dfbc-4579-898f-e05d09d4bd4c","values":[{"x":0,"y":0},{"x":1,"y":1},{"x":2,"y":4},{"x":3,"y":9},{"x":4,"y":16},{"x":5,"y":25},{"x":6,"y":36},{"x":7,"y":49},{"x":8,"y":64},{"x":9,"y":81}]}],"width":400,"height":247.2187957763672,"padding":{"bottom":40,"top":10,"right":10,"left":55}},"value":"#gorilla_repl.vega.VegaView{:content {:axes [{:scale \"x\", :type \"x\"} {:scale \"y\", :type \"y\"}], :scales [{:name \"x\", :type \"linear\", :range \"width\", :zero false, :domain {:data \"50689ba9-dfbc-4579-898f-e05d09d4bd4c\", :field \"data.x\"}} {:name \"y\", :type \"linear\", :range \"height\", :nice true, :zero false, :domain {:data \"50689ba9-dfbc-4579-898f-e05d09d4bd4c\", :field \"data.y\"}}], :marks [{:type \"symbol\", :from {:data \"50689ba9-dfbc-4579-898f-e05d09d4bd4c\"}, :properties {:enter {:x {:scale \"x\", :field \"data.x\"}, :y {:scale \"y\", :field \"data.y\"}, :fill {:value \"steelblue\"}, :fillOpacity {:value 1}}, :update {:shape \"circle\", :size {:value 70}, :stroke {:value \"transparent\"}}, :hover {:size {:value 210}, :stroke {:value \"white\"}}}}], :data [{:name \"50689ba9-dfbc-4579-898f-e05d09d4bd4c\", :values ({:x 0, :y 0} {:x 1, :y 1} {:x 2, :y 4} {:x 3, :y 9} {:x 4, :y 16} {:x 5, :y 25} {:x 6, :y 36} {:x 7, :y 49} {:x 8, :y 64} {:x 9, :y 81})}], :width 400, :height 247.2188, :padding {:bottom 40, :top 10, :right 10, :left 55}}}"}
 ;; <=
 
 ;; **
@@ -40,8 +89,6 @@
 ;;; My proposal for exponential land tax is based on the idea that you pay *a little bit on the first hectare, a bit more on the next, a bit more on the next, and so on*. It's based on that because I started with the legend of the [grains of rice on a chess-board](http://www.singularitysymposium.com/exponential-growth.html).
 ;;; 
 ;;; So the amount of tax you pay is <span><span style="font-size: large;">&Sigma;</span><sub>1..n</sub>(cn)<sup>e</sup></span>, where *n* is the number of hectares you own.
-;;; 
-;;; Actually, this is almost a purposeless complication; simply applying the exponential function to the number of hectares in a holding scales almost as rapidly. But I think the concept of *a little bit for the first hectare, a bit more for the next, and so on* is easy for folk to grasp.
 ;;; 
 ;;; But to be able to compute this, we need to be able to construct and sum exponential series. So here's a function to do that.
 ;; **
@@ -67,9 +114,27 @@
 ;; <=
 
 ;; **
+;;; A summed exponential series increases even more rapidly:
+;; **
+
+;; @@
+(list-plot
+  (map
+  	#(summed-exponential-series 1 2 %)
+  	(range 0 100 10)))
+;; @@
+;; =>
+;;; {"type":"vega","content":{"axes":[{"scale":"x","type":"x"},{"scale":"y","type":"y"}],"scales":[{"name":"x","type":"linear","range":"width","zero":false,"domain":{"data":"9561dadd-b4b7-4acf-ac78-fddfb3dc8810","field":"data.x"}},{"name":"y","type":"linear","range":"height","nice":true,"zero":false,"domain":{"data":"9561dadd-b4b7-4acf-ac78-fddfb3dc8810","field":"data.y"}}],"marks":[{"type":"symbol","from":{"data":"9561dadd-b4b7-4acf-ac78-fddfb3dc8810"},"properties":{"enter":{"x":{"scale":"x","field":"data.x"},"y":{"scale":"y","field":"data.y"},"fill":{"value":"steelblue"},"fillOpacity":{"value":1}},"update":{"shape":"circle","size":{"value":70},"stroke":{"value":"transparent"}},"hover":{"size":{"value":210},"stroke":{"value":"white"}}}}],"data":[{"name":"9561dadd-b4b7-4acf-ac78-fddfb3dc8810","values":[{"x":0,"y":0},{"x":1,"y":285},{"x":2,"y":2470},{"x":3,"y":8555},{"x":4,"y":20540},{"x":5,"y":40425},{"x":6,"y":70210},{"x":7,"y":111895},{"x":8,"y":167480},{"x":9,"y":238965}]}],"width":400,"height":247.2187957763672,"padding":{"bottom":40,"top":10,"right":10,"left":55}},"value":"#gorilla_repl.vega.VegaView{:content {:axes [{:scale \"x\", :type \"x\"} {:scale \"y\", :type \"y\"}], :scales [{:name \"x\", :type \"linear\", :range \"width\", :zero false, :domain {:data \"9561dadd-b4b7-4acf-ac78-fddfb3dc8810\", :field \"data.x\"}} {:name \"y\", :type \"linear\", :range \"height\", :nice true, :zero false, :domain {:data \"9561dadd-b4b7-4acf-ac78-fddfb3dc8810\", :field \"data.y\"}}], :marks [{:type \"symbol\", :from {:data \"9561dadd-b4b7-4acf-ac78-fddfb3dc8810\"}, :properties {:enter {:x {:scale \"x\", :field \"data.x\"}, :y {:scale \"y\", :field \"data.y\"}, :fill {:value \"steelblue\"}, :fillOpacity {:value 1}}, :update {:shape \"circle\", :size {:value 70}, :stroke {:value \"transparent\"}}, :hover {:size {:value 210}, :stroke {:value \"white\"}}}}], :data [{:name \"9561dadd-b4b7-4acf-ac78-fddfb3dc8810\", :values ({:x 0, :y 0} {:x 1, :y 285} {:x 2, :y 2470} {:x 3, :y 8555} {:x 4, :y 20540} {:x 5, :y 40425} {:x 6, :y 70210} {:x 7, :y 111895} {:x 8, :y 167480} {:x 9, :y 238965})}], :width 400, :height 247.2188, :padding {:bottom 40, :top 10, :right 10, :left 55}}}"}
+;; <=
+
+;; **
+;;; So this is the principle on which the exponential tax idea works. People with little land pay very little indeed, but at each increase in scale, the tax gets relatively higher. There are no steps where the rate suddenly changes, as there is at present with income tax. There's no way that anyone, at any scale, can say *"this is not fair because those people's tax is not calculated in the same way as mine is"*.
+;;; 
+;;; It's a simple set of rules, it applies to everyone everywhere - to a suburban garden as mush as to a grouse moor - and it makes it progressively harder to own holdings as they get larger.
+;;; 
 ;;; ## Formatting money
 ;;; 
-;;; It may be convenient to be able to format amounts of money, so here's a function to do this.
+;;; It may be convenient to be able to format amounts of money, so here's a function to do that.
 ;; **
 
 ;; @@
